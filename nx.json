@@ -11,9 +11,6 @@
     "api": {
       "tags": []
     },
-    "client-ng-e2e": {
-      "tags": []
-    },
     "client-ng": {
       "tags": []
     }
