@@ -1,0 +1,13 @@
+[2019-09-11T23:09:09.009Z][QUERY]: SELECT * FROM "sqlite_master" WHERE "type" = 'table' AND "name" = 'migrations'
+[2019-09-11T23:09:09.011Z][QUERY]: CREATE TABLE "migrations" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "timestamp" bigint NOT NULL, "name" varchar NOT NULL)
+[2019-09-11T23:09:09.068Z][QUERY]: SELECT * FROM "migrations" "migrations"
+[2019-09-11T23:13:10.603Z][QUERY]: SELECT * FROM "sqlite_master" WHERE "type" = 'table' AND "name" = 'migrations'
+[2019-09-11T23:13:10.611Z][QUERY]: SELECT * FROM "migrations" "migrations"
+[2019-09-11T23:15:03.791Z][QUERY]: SELECT * FROM "sqlite_master" WHERE "type" = 'table' AND "name" = 'migrations'
+[2019-09-11T23:15:03.793Z][QUERY]: SELECT * FROM "migrations" "migrations"
+[2019-09-11T23:15:06.644Z][QUERY]: SELECT * FROM "sqlite_master" WHERE "type" = 'table' AND "name" = 'migrations'
+[2019-09-11T23:15:06.646Z][QUERY]: SELECT * FROM "migrations" "migrations"
+[2019-09-11T23:15:25.135Z][QUERY]: SELECT * FROM "sqlite_master" WHERE "type" = 'table' AND "name" = 'migrations'
+[2019-09-11T23:15:25.140Z][QUERY]: SELECT * FROM "migrations" "migrations"
+[2019-09-11T23:16:29.768Z][QUERY]: SELECT * FROM "sqlite_master" WHERE "type" = 'table' AND "name" = 'migrations'
+[2019-09-11T23:16:29.771Z][QUERY]: SELECT * FROM "migrations" "migrations"
