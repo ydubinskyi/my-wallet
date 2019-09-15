@@ -1,10 +1,13 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, UseGuards } from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
+
 import { CurrencyService } from './currency.service';
 
-@Controller('currency')
+@Controller('currencies')
 export class CurrencyController {
   constructor(private readonly currencyService: CurrencyService) {}
 
+  @UseGuards(AuthGuard())
   @Get()
   getAll() {
     return this.currencyService.findAll();

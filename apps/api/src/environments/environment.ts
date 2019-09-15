@@ -1,3 +1,4 @@
 export const environment = {
-  production: false
+  production: false,
+  secret: process.env.APP_SECRET || 'supersecret',
 };
