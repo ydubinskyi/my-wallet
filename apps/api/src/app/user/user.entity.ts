@@ -1,5 +1,6 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
 import { User as IUser } from './user.interface';
+import { Account } from '../account/account.entity';
 
 @Entity()
 export class User {
@@ -20,6 +21,9 @@ export class User {
     default: () => 'CURRENT_TIMESTAMP',
   })
   created: Date;
+
+  @OneToMany(type => Account, account => account.owner)
+  accounts: Account[];
 
   toJSON(): IUser {
     const { id, username, email, created } = this;

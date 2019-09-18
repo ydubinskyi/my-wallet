@@ -4,6 +4,7 @@ import * as path from 'path';
 
 import { Currency } from './currency/currency.entity';
 import { User } from './user/user.entity';
+import { Account } from './account/account.entity';
 
 @Module({
   imports: [
@@ -11,7 +12,7 @@ import { User } from './user/user.entity';
     TypeOrmModule.forRoot({
       type: 'sqlite',
       database: `${path.resolve(__dirname)}/wallet-db.sqlite`,
-      entities: [Currency, User],
+      entities: [Currency, User, Account],
       synchronize: true,
     }),
   ],
