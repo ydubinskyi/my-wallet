@@ -62,7 +62,7 @@
             "main": "apps/client-ng/src/main.ts",
             "polyfills": "apps/client-ng/src/polyfills.ts",
             "tsConfig": "apps/client-ng/tsconfig.app.json",
-            "aot": false,
+            "aot": true,
             "assets": [
               "apps/client-ng/src/favicon.ico",
               "apps/client-ng/src/assets"
@@ -83,7 +83,6 @@
               "sourceMap": false,
               "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
