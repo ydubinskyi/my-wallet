@@ -1,11 +1,11 @@
 import { Module } from '@nestjs/common';
 
-import { AuthModule } from '../auth/auth.module';
 import { CurrencyService } from './currency.service';
 import { CurrencyController } from './currency.controller';
+import { DbModule } from '../db/db.module';
 
 @Module({
-  imports: [AuthModule],
+  imports: [DbModule],
   providers: [CurrencyService],
   controllers: [CurrencyController],
 })

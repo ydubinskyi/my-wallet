@@ -8,6 +8,10 @@ import { UserModule } from './user/user.module';
 import { AccountModule } from './account/account.module';
 
 @Module({
-  imports: [PassportModule.register({ defaultStrategy: 'jwt' }), DbModule],
+  imports: [
+    DbModule,
+    CurrencyModule,
+    PassportModule.register({ defaultStrategy: 'jwt' }),
+  ],
 })
 export class AppModule {}

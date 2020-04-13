@@ -8,7 +8,7 @@ const providers = [
       const knex = Knex({
         client: 'sqlite3',
         connection: {
-          filename: './my-wallet-db.sqlite',
+          filename: './apps/api/my-wallet-db.sqlite',
         },
         debug: process.env.KNEX_DEBUG === 'true',
       });
