@@ -22,7 +22,10 @@ export class User {
   })
   created: Date;
 
-  @OneToMany(type => Account, account => account.owner)
+  @OneToMany(
+    type => Account,
+    account => account.owner,
+  )
   accounts: Account[];
 
   toJSON(): IUser {
