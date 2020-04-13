@@ -10,6 +10,8 @@ import { AccountModule } from './account/account.module';
 @Module({
   imports: [
     DbModule,
+    AuthModule,
+    UserModule,
     CurrencyModule,
     PassportModule.register({ defaultStrategy: 'jwt' }),
   ],
