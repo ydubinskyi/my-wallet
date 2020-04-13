@@ -42,7 +42,8 @@
           "builder": "@nrwl/jest:jest",
           "options": {
             "jestConfig": "apps/api/jest.config.js",
-            "tsConfig": "apps/api/tsconfig.spec.json"
+            "tsConfig": "apps/api/tsconfig.spec.json",
+            "passWithNoTests": true
           }
         }
       }
@@ -91,6 +92,10 @@
                   "type": "initial",
                   "maximumWarning": "2mb",
                   "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
                 }
               ]
             }
@@ -128,7 +133,8 @@
           "options": {
             "jestConfig": "apps/client-ng/jest.config.js",
             "tsConfig": "apps/client-ng/tsconfig.spec.json",
-            "setupFile": "apps/client-ng/src/test-setup.ts"
+            "setupFile": "apps/client-ng/src/test-setup.ts",
+            "passWithNoTests": true
           }
         }
       }

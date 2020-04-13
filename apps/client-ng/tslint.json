@@ -3,5 +3,8 @@
   "rules": {
     "directive-selector": [true, "attribute", "myWallet", "camelCase"],
     "component-selector": [true, "element", "my-wallet", "kebab-case"]
+  },
+  "linterOptions": {
+    "exclude": ["!**/*"]
   }
 }
