@@ -5,7 +5,7 @@
   "scripts": {
     "ng": "ng",
     "nx": "nx",
-    "knex": "TS_NODE_COMPILER_OPTIONS='{\"module\":\"commonjs\"}' knex --knexfile ./apps/api/knexfile.ts",
+    "knex": "cross-env TS_NODE_COMPILER_OPTIONS={\\\"module\\\":\\\"commonjs\\\"} knex --knexfile ./apps/api/knexfile.ts",
     "start": "ng serve",
     "build": "ng build",
     "test": "ng test",
@@ -78,6 +78,7 @@
     "@types/passport-jwt": "^3.0.2",
     "@types/passport-local": "^1.0.33",
     "codelyzer": "^5.1.2",
+    "cross-env": "^7.0.2",
     "eslint": "6.8.0",
     "jest": "25.2.4",
     "jest-preset-angular": "8.0.0",
