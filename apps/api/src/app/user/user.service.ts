@@ -12,7 +12,12 @@ export class UserService {
   constructor(@Inject('KnexConnection') private readonly connection: Knex) {}
 
   async getUsers(): Promise<IUser[]> {
-    return await this.connection.table<User>(TABLES.USER).select('*');
+    return await (
+      await this.connection.table<User>(TABLES.USER).select('*')
+    ).map(item => {
+      delete item.password;
+      return item;
+    });
   }
 
   async getUserByUsername(username: string): Promise<User> {
