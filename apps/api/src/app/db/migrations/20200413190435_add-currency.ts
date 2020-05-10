@@ -5,7 +5,7 @@ const tableName = TABLES.CURRENCY;
 
 export async function up(knex: Knex) {
   return knex.schema.createTable(tableName, t => {
-    t.increments();
+    t.increments('id').primary();
 
     t.string('name').notNullable();
 
