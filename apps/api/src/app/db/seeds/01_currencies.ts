@@ -2,7 +2,7 @@ import * as Knex from 'knex';
 
 import { Currency } from '../models/currency.model';
 
-export async function seed(knex: Knex): Promise<any> {
+export async function seed(knex: Knex) {
   await knex<Currency>('currency').del();
 
   await knex<Currency>('currency').insert([

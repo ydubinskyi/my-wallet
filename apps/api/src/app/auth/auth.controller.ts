@@ -1,6 +1,8 @@
 import { Controller, Post, UseGuards, Body, Request } from '@nestjs/common';
-import { ApiImplicitBody } from '@nestjs/swagger';
 import { AuthGuard } from '@nestjs/passport';
+import {
+  ApiOperation,
+} from '@nestjs/swagger';
 
 import { AuthService } from './auth.service';
 import { RegisterUserDTO } from './dto/register-user.dto';
@@ -12,13 +14,14 @@ export class AuthController {
 
   @UseGuards(AuthGuard('local'))
   @Post('login')
-  @ApiImplicitBody({ name: '', type: LoginUserDTO })
-  async login(@Request() req) {
-    return this.authService.login(req.user);
+  @ApiOperation({ summary: 'Login user' })
+  async login(@Body() body: LoginUserDTO) {
+    return this.authService.login(body);
   }
 
   @Post('register')
-  async register(@Body() body: RegisterUserDTO) {
-    return this.authService.register(body);
+  @ApiOperation({ summary: 'Register user' })
+  async register(@Body() registerUserDto: RegisterUserDTO) {
+    return this.authService.register(registerUserDto);
   }
 }

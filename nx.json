@@ -1,19 +1,17 @@
 {
-  "npmScope": "my-wallet",
+  "npmScope": "nx-react-nestjs-test",
+  "affected": {
+    "defaultBase": "master"
+  },
   "implicitDependencies": {
-    "angular.json": "*",
-    "package.json": "*",
-    "tsconfig.json": "*",
+    "workspace.json": "*",
+    "package.json": {
+      "dependencies": "*",
+      "devDependencies": "*"
+    },
+    "tsconfig.base.json": "*",
     "tslint.json": "*",
     "nx.json": "*"
-  },
-  "projects": {
-    "api": {
-      "tags": []
-    },
-    "client-ng": {
-      "tags": []
-    }
   },
   "tasksRunnerOptions": {
     "default": {
@@ -21,6 +19,18 @@
       "options": {
         "cacheableOperations": ["build", "lint", "test", "e2e"]
       }
+    }
+  },
+  "projects": {
+    "client": {
+      "tags": []
+    },
+    "client-e2e": {
+      "tags": [],
+      "implicitDependencies": ["client"]
+    },
+    "api": {
+      "tags": []
     }
   }
 }
