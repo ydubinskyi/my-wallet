@@ -1,11 +1,11 @@
 import * as Knex from 'knex';
 
-import { Currency } from '../models/currency.model';
+import { TABLES } from '../constants';
 
 export async function seed(knex: Knex) {
-  await knex<Currency>('currency').del();
+  await knex(TABLES.CURRENCY).del();
 
-  await knex<Currency>('currency').insert([
+  await knex(TABLES.CURRENCY).insert([
     {
       name: 'US Dollar',
       code: 'USD',
@@ -25,6 +25,11 @@ export async function seed(knex: Knex) {
       name: 'Polish Zloty',
       code: 'PLN',
       symbol: 'PLN',
+    },
+    {
+      name: 'Ukrainian hryvna',
+      code: 'UAH',
+      symbol: 'UAH',
     },
   ]);
 }
