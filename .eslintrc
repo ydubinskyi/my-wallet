@@ -19,6 +19,8 @@
     "@typescript-eslint/explicit-member-accessibility": "off",
     "@typescript-eslint/explicit-function-return-type": "off",
     "@typescript-eslint/no-parameter-properties": "off",
+    "camelcase": "off",
+    "@typescript-eslint/camelcase": ["error", { "properties": "never" }],
     "@nrwl/nx/enforce-module-boundaries": [
       "error",
       {

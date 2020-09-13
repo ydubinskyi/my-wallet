@@ -14,7 +14,7 @@ export class UserService {
   async getUsers(): Promise<IUser[]> {
     return await (
       await this.connection.table<User>(TABLES.USER).select('*')
-    ).map(item => {
+    ).map((item) => {
       delete item.password;
       return item;
     });
@@ -28,11 +28,16 @@ export class UserService {
       .first();
   }
 
-  async createUser(user: RegisterUserDTO): Promise<User> {
-    user.password = await bcrypt.hash(user.password, 10);
+  async createUser(userDTO: RegisterUserDTO): Promise<IUser> {
+    const newUser = new User();
+
+    newUser.email = userDTO.email;
+    newUser.username = userDTO.username;
+    newUser.password = await bcrypt.hash(userDTO.password, 10);
+    newUser.base_currency_id = 1;
 
     try {
-      return this.connection.table<User>(TABLES.USER).insert(user);
+      return this.connection.table<User>(TABLES.USER).insert(newUser);
     } catch (error) {
       throw new BadRequestException(error);
     }
@@ -40,7 +45,7 @@ export class UserService {
 
   async compareHash(
     password: string | undefined,
-    hash: string | undefined,
+    hash: string | undefined
   ): Promise<boolean> {
     return bcrypt.compare(password, hash);
   }

@@ -7,4 +7,5 @@ export class User {
   password: string;
   role: UserRole;
   createdAt: string | Date;
+  base_currency_id: number;
 }
