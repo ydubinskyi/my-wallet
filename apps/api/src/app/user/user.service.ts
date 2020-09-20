@@ -34,7 +34,7 @@ export class UserService {
     newUser.email = userDTO.email;
     newUser.username = userDTO.username;
     newUser.password = await bcrypt.hash(userDTO.password, 10);
-    newUser.base_currency_id = 1;
+    newUser.base_currency_id = 101;
 
     try {
       return this.connection.table<User>(TABLES.USER).insert(newUser);
