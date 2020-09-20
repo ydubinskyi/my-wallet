@@ -15,7 +15,6 @@ async function bootstrap() {
     .setDescription('Wallet api')
     .setVersion('1.0')
     .addBearerAuth()
-    .setBasePath(globalPrefix)
     .build();
   const document = SwaggerModule.createDocument(app, options);
   SwaggerModule.setup('api', app, document);
