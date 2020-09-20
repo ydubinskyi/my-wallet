@@ -13,4 +13,5 @@ module.exports = {
     directory: './src/app/db/seeds',
     stub: './src/app/db/seed.stub',
   },
+  useNullAsDefault: true,
 } as Knex.Config;
