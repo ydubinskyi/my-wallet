@@ -35,7 +35,6 @@ export async function up(knex: Knex) {
         .notNullable()
         .onDelete('cascade');
     })
-
     .createTable(TABLES.USER_CURRENCY, (t) => {
       t.increments('id').primary();
 
