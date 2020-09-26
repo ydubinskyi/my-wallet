@@ -20,7 +20,7 @@ export class UserService {
     return this.connection.table<User>(TABLES.USER);
   }
 
-  async create(userDTO: RegisterUserDTO): Promise<IUser> {
+  async create(userDTO: RegisterUserDTO): Promise<User> {
     const newUser = new User();
 
     newUser.email = userDTO.email;

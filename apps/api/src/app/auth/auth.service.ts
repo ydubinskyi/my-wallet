@@ -1,6 +1,7 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
+import { User } from '../user/entities/user.entity';
 
 import { UserService } from '../user/user.service';
 import { RegisterUserDTO } from './dto/register-user.dto';
@@ -22,7 +23,7 @@ export class AuthService {
     return null;
   }
 
-  async login(user) {
+  async login(user: User) {
     const payload = { username: user.username, sub: user.id };
 
     return {
