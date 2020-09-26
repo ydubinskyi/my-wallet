@@ -20,12 +20,7 @@
     "@typescript-eslint/explicit-function-return-type": "off",
     "@typescript-eslint/no-parameter-properties": "off",
     "camelcase": "off",
-    "@typescript-eslint/camelcase": [
-      "error",
-      {
-        "properties": "never"
-      }
-    ],
+    "@typescript-eslint/camelcase": "off",
     "@nrwl/nx/enforce-module-boundaries": [
       "error",
       {
