@@ -6,8 +6,4 @@ export class UpdateUserCurrencyDto {
   @IsNotEmpty()
   @IsNumber()
   readonly exchange_rate: number;
-
-  @ApiProperty()
-  @IsNotEmpty()
-  readonly currency_id: number;
 }
