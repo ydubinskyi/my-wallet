@@ -6,10 +6,10 @@ import {
 } from '@nestjs/common';
 import * as Knex from 'knex';
 
-import { Currency } from '../db/models/currency.model';
 import { TABLES } from '../db/constants';
-import { CreateCurrencyDTO } from './dto/create-currency.dto';
-import { UpdateCurrencyDTO } from './dto/update-currency.dto';
+import { Currency } from './entities/currency.entity';
+import { CreateCurrencyDto } from './dto/create-currency.dto';
+import { UpdateCurrencyDto } from './dto/update-currency.dto';
 
 @Injectable()
 export class CurrencyService {
@@ -19,11 +19,7 @@ export class CurrencyService {
     return this.connection.table<Currency>(TABLES.CURRENCY);
   }
 
-  async findAll(): Promise<Currency[]> {
-    return await this.table.select('*');
-  }
-
-  async create(params: CreateCurrencyDTO): Promise<Currency> {
+  async create(params: CreateCurrencyDto): Promise<Currency> {
     try {
       return await this.table.insert(params);
     } catch (error) {
@@ -31,7 +27,11 @@ export class CurrencyService {
     }
   }
 
-  async update(id: number, params: UpdateCurrencyDTO): Promise<Currency> {
+  async findAll(): Promise<Currency[]> {
+    return await this.table.select('*');
+  }
+
+  async findOne(id: number): Promise<Currency> {
     try {
       const items = await this.table.where({ id });
 
@@ -39,13 +39,29 @@ export class CurrencyService {
         throw new NotFoundException();
       }
 
-      return this.table.where({ id }).update(params);
+      return this.table.select('*').where({ id }).first();
     } catch (error) {
       throw new BadRequestException(error);
     }
   }
 
-  async delete(id: number) {
+  async update(id: number, params: UpdateCurrencyDto): Promise<Currency> {
+    try {
+      const items = await this.table.where({ id });
+
+      if (items.length < 1) {
+        throw new NotFoundException();
+      }
+
+      await this.table.where({ id }).update(params);
+
+      return this.table.where({ id }).select('*').first();
+    } catch (error) {
+      throw new BadRequestException(error);
+    }
+  }
+
+  async remove(id: number) {
     try {
       const items = await this.table.where({ id });
 

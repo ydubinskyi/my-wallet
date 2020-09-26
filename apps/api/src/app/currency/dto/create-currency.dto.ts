@@ -1,7 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsNotEmpty } from 'class-validator';
 
-export class CreateCurrencyDTO {
+export class CreateCurrencyDto {
   @ApiProperty()
   @IsNotEmpty()
   readonly name: string;

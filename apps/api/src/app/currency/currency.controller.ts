@@ -12,35 +12,40 @@ import {
 import { ApiBearerAuth } from '@nestjs/swagger';
 
 import { CurrencyService } from './currency.service';
-import { CreateCurrencyDTO } from './dto/create-currency.dto';
-import { UpdateCurrencyDTO } from './dto/update-currency.dto';
+import { CreateCurrencyDto } from './dto/create-currency.dto';
+import { UpdateCurrencyDto } from './dto/update-currency.dto';
 
 @ApiBearerAuth()
 @Controller('currencies')
 export class CurrencyController {
   constructor(private readonly currencyService: CurrencyService) {}
 
+  @Post()
+  create(@Body() createCurrencyDto: CreateCurrencyDto) {
+    return this.currencyService.create(createCurrencyDto);
+  }
+
   @Get()
-  getAll() {
+  findAll() {
     return this.currencyService.findAll();
   }
 
-  @Post()
-  create(@Body() createCurrencyDto: CreateCurrencyDTO) {
-    return this.currencyService.create(createCurrencyDto);
+  @Get(':id')
+  findOne(@Param('id') id: string) {
+    return this.currencyService.findOne(+id);
   }
 
   @Put(':id')
   update(
-    @Param('id') id: number,
-    @Body() updateCurrencyDto: UpdateCurrencyDTO
+    @Param('id') id: string,
+    @Body() updateCurrencyDto: UpdateCurrencyDto
   ) {
-    return this.currencyService.update(id, updateCurrencyDto);
+    return this.currencyService.update(+id, updateCurrencyDto);
   }
 
   @Delete(':id')
   @HttpCode(HttpStatus.NO_CONTENT)
-  delete(@Param('id') id: number) {
-    return this.currencyService.delete(id);
+  remove(@Param('id') id: string) {
+    return this.currencyService.remove(+id);
   }
 }
