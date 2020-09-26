@@ -8,7 +8,9 @@ import {
   Post,
   Put,
   HttpStatus,
+  UseGuards,
 } from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
 import { ApiBearerAuth } from '@nestjs/swagger';
 
 import { CurrencyService } from './currency.service';
@@ -16,6 +18,7 @@ import { CreateCurrencyDto } from './dto/create-currency.dto';
 import { UpdateCurrencyDto } from './dto/update-currency.dto';
 
 @ApiBearerAuth()
+@UseGuards(AuthGuard('jwt'))
 @Controller('currencies')
 export class CurrencyController {
   constructor(private readonly currencyService: CurrencyService) {}
