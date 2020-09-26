@@ -1,5 +1,5 @@
 {
-  "npmScope": "nx-react-nestjs-test",
+  "npmScope": "my-wallet",
   "affected": {
     "defaultBase": "master"
   },
