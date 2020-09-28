@@ -6,6 +6,7 @@ import { AuthModule } from './auth/auth.module';
 import { CurrencyModule } from './currency/currency.module';
 import { UserModule } from './user/user.module';
 import { UserCurrencyModule } from './user-currency/user-currency.module';
+import { AccountModule } from './account/account.module';
 
 @Module({
   imports: [
@@ -15,6 +16,7 @@ import { UserCurrencyModule } from './user-currency/user-currency.module';
     CurrencyModule,
     PassportModule.register({ defaultStrategy: 'jwt' }),
     UserCurrencyModule,
+    AccountModule,
   ],
 })
 export class AppModule {}
