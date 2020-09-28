@@ -1,41 +1,41 @@
 import {
-  Injectable,
-  Inject,
   BadRequestException,
+  Inject,
+  Injectable,
   NotFoundException,
 } from '@nestjs/common';
 import * as Knex from 'knex';
 
 import { TABLES } from '../db/constants';
-import { Currency } from './entities/currency.entity';
-import { CreateCurrencyDto } from './dto/create-currency.dto';
-import { UpdateCurrencyDto } from './dto/update-currency.dto';
+import { RecordCategory } from './entities/record-category.entity';
+import { CreateRecordCategoryDto } from './dto/create-record-category.dto';
+import { UpdateRecordCategoryDto } from './dto/update-record-category.dto';
 
 @Injectable()
-export class CurrencyService {
+export class RecordCategoryService {
   constructor(@Inject('KnexConnection') private readonly connection: Knex) {}
 
   private get table() {
-    return this.connection.table<Currency>(TABLES.CURRENCY);
+    return this.connection.table<RecordCategory>(TABLES.RECORD_CATEGORY);
   }
 
-  async create(params: CreateCurrencyDto): Promise<Currency> {
+  async create(createRecordCategoryDto: CreateRecordCategoryDto) {
     try {
-      return await this.table.insert(params);
+      return await this.table.insert(createRecordCategoryDto);
     } catch (error) {
       throw new BadRequestException(error);
     }
   }
 
-  async findAll(): Promise<Currency[]> {
+  async findAll() {
     return await this.table.select('*');
   }
 
-  async findOne(id: number): Promise<Currency> {
+  async findOne(id: number) {
     try {
-      const item = await this.table.where({ id }).first();
+      const items = await this.table.where({ id });
 
-      if (!item) {
+      if (items.length < 1) {
         throw new NotFoundException();
       }
 
@@ -45,7 +45,7 @@ export class CurrencyService {
     }
   }
 
-  async update(id: number, params: UpdateCurrencyDto): Promise<Currency> {
+  async update(id: number, updateRecordCategoryDto: UpdateRecordCategoryDto) {
     try {
       const item = await this.table.where({ id }).first();
 
@@ -53,7 +53,12 @@ export class CurrencyService {
         throw new NotFoundException();
       }
 
-      await this.table.where({ id }).update(params);
+      const newRecordCategory = {
+        ...item,
+        ...updateRecordCategoryDto,
+      };
+
+      await this.table.where({ id }).update(newRecordCategory);
 
       return this.table.where({ id }).select('*').first();
     } catch (error) {
@@ -63,9 +68,9 @@ export class CurrencyService {
 
   async remove(id: number) {
     try {
-      const item = await this.table.where({ id }).first();
+      const items = await this.table.where({ id });
 
-      if (!item) {
+      if (items.length < 1) {
         throw new NotFoundException();
       }
 

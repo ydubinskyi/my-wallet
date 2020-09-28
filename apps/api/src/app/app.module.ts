@@ -7,16 +7,18 @@ import { CurrencyModule } from './currency/currency.module';
 import { UserModule } from './user/user.module';
 import { UserCurrencyModule } from './user-currency/user-currency.module';
 import { AccountModule } from './account/account.module';
+import { RecordCategoryModule } from './record-category/record-category.module';
 
 @Module({
   imports: [
     DbModule,
+    PassportModule.register({ defaultStrategy: 'jwt' }),
     AuthModule,
     UserModule,
     CurrencyModule,
-    PassportModule.register({ defaultStrategy: 'jwt' }),
     UserCurrencyModule,
     AccountModule,
+    RecordCategoryModule,
   ],
 })
 export class AppModule {}
