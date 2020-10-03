@@ -2,8 +2,8 @@ import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import Container from '@material-ui/core/Container';
 
-import Header from './Header';
-import Home from '../pages/Home';
+import Header from './components/Header';
+import Home from '../home/home.view';
 
 const Layout = () => {
   return (
