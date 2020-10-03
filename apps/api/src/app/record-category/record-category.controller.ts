@@ -19,7 +19,7 @@ import { UpdateRecordCategoryDto } from './dto/update-record-category.dto';
 
 @ApiBearerAuth()
 @UseGuards(AuthGuard('jwt'))
-@Controller('record-category')
+@Controller('record-categories')
 export class RecordCategoryController {
   constructor(private readonly recordCategoryService: RecordCategoryService) {}
 

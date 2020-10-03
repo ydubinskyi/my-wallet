@@ -8,6 +8,7 @@ import { UserModule } from './user/user.module';
 import { UserCurrencyModule } from './user-currency/user-currency.module';
 import { AccountModule } from './account/account.module';
 import { RecordCategoryModule } from './record-category/record-category.module';
+import { RecordModule } from './record/record.module';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { RecordCategoryModule } from './record-category/record-category.module';
     UserCurrencyModule,
     AccountModule,
     RecordCategoryModule,
+    RecordModule,
   ],
 })
 export class AppModule {}

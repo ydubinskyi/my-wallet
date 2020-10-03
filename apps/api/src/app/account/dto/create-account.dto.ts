@@ -1,5 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsEnum, IsHexColor, IsNotEmpty, IsNumber } from 'class-validator';
+
 import { AccountType } from '../types/account-type.enum';
 
 export class CreateAccountDto {
