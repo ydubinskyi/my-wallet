@@ -1,12 +1,12 @@
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Switch } from 'react-router-dom';
 import Container from '@material-ui/core/Container';
 
 import Header from './core/components/header';
 import Home from './home/home.view';
 import Login from './auth/login.view';
 import Register from './auth/register.view';
-import { PrivateRoute } from './shared/components/private-route';
+import { PrivateRoute, PublicOnlyRoute } from './shared';
 
 export const App = () => {
   return (
@@ -14,12 +14,12 @@ export const App = () => {
       <Header />
       <Container component="main">
         <Switch>
-          <Route path="/login">
+          <PublicOnlyRoute path="/login">
             <Login />
-          </Route>
-          <Route path="/register">
+          </PublicOnlyRoute>
+          <PublicOnlyRoute path="/register">
             <Register />
-          </Route>
+          </PublicOnlyRoute>
 
           <PrivateRoute path="/">
             <Home />

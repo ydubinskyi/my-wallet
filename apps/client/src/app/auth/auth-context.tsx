@@ -17,8 +17,6 @@ AuthContext.displayName = 'AuthContext';
 const AuthProvider = (props) => {
   const [user, setUser] = useState<UserDetails>(null);
 
-  const isAuthenticated = () => !!user?.access_token;
-
   const login = React.useCallback(
     (form: LoginDetails) =>
       authService.login(form).then((user) => setUser(user)),
@@ -34,13 +32,16 @@ const AuthProvider = (props) => {
     setUser(null);
   }, [setUser]);
 
-  const value = React.useMemo(() => ({ user, login, logout, register }), [
-    login,
-    logout,
-    register,
-    user,
-    isAuthenticated,
-  ]);
+  const value = React.useMemo(
+    () => ({
+      user,
+      login,
+      logout,
+      register,
+      isAuthenticated: !!user?.access_token,
+    }),
+    [login, logout, register, user]
+  );
 
   return <AuthContext.Provider value={value} {...props} />;
 };

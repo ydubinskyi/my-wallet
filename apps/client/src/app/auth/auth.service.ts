@@ -16,11 +16,11 @@ function handleUserResponse(userDetails: UserDetails) {
 }
 
 async function login(data: LoginDetails): Promise<UserDetails> {
-  return client('login', { data }).then(handleUserResponse);
+  return client('auth/login', { data }).then(handleUserResponse);
 }
 
 async function register(data: RegisterDetails): Promise<UserDetails> {
-  return client('register', { data }).then(handleUserResponse);
+  return client('auth/register', { data }).then(handleUserResponse);
 }
 
 async function logout(): Promise<void> {

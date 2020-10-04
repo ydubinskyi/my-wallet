@@ -1,4 +1,4 @@
-const apiURL = process.env.REACT_APP_API_URL || 'http://localhost:3333';
+const apiURL = process.env.REACT_APP_API_URL || 'http://localhost:3333/api';
 
 interface ApiClientOptions {
   data?: any;
