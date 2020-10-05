@@ -29,13 +29,10 @@ export class CurrencyService {
     }
   }
 
-  async findAll({
-    page,
-    perPage,
-  }: PaginationParams): Promise<IWithPagination<Currency[]>> {
-    return await this.table
-      .select('*')
-      .paginate({ perPage, currentPage: page });
+  async findAll(
+    paginationParams: PaginationParams
+  ): Promise<IWithPagination<Currency[]>> {
+    return await this.table.select('*').paginate(paginationParams);
   }
 
   async findOne(id: number): Promise<Currency> {

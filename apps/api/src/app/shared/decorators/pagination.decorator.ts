@@ -1,9 +1,9 @@
 import { createParamDecorator, ExecutionContext } from '@nestjs/common';
 
-export const Pagination = createParamDecorator((ctx: ExecutionContext) => {
+export const Pagination = createParamDecorator((_, ctx: ExecutionContext) => {
   const request = ctx.switchToHttp().getRequest();
-  const page = request['page'] || 1;
+  const currentPage = request['page'] || 1;
   const perPage = request['per_page'] || 10;
 
-  return { page, perPage };
+  return { currentPage, perPage };
 });
