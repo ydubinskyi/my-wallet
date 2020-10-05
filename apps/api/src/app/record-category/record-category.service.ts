@@ -5,7 +5,9 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import * as Knex from 'knex';
+import { IWithPagination } from 'knex-paginate';
 
+import { PaginationParams } from '../shared/types';
 import { TABLES } from '../db/constants';
 import { RecordCategory } from './entities/record-category.entity';
 import { CreateRecordCategoryDto } from './dto/create-record-category.dto';
@@ -27,8 +29,10 @@ export class RecordCategoryService {
     }
   }
 
-  async findAll() {
-    return await this.table.select('*');
+  async findAll(
+    paginationParams: PaginationParams
+  ): Promise<IWithPagination<RecordCategory[]>> {
+    return await this.table.select('*').paginate(paginationParams);
   }
 
   async findOne(id: number) {

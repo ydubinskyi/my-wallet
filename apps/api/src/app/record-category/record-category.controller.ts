@@ -16,6 +16,8 @@ import { AuthGuard } from '@nestjs/passport';
 import { RecordCategoryService } from './record-category.service';
 import { CreateRecordCategoryDto } from './dto/create-record-category.dto';
 import { UpdateRecordCategoryDto } from './dto/update-record-category.dto';
+import { OApiPaginationParams, Pagination } from '../shared/decorators';
+import { PaginationParams } from '../shared/types';
 
 @ApiBearerAuth()
 @UseGuards(AuthGuard('jwt'))
@@ -29,8 +31,9 @@ export class RecordCategoryController {
   }
 
   @Get()
-  findAll() {
-    return this.recordCategoryService.findAll();
+  @OApiPaginationParams()
+  findAll(@Pagination() pagination: PaginationParams) {
+    return this.recordCategoryService.findAll(pagination);
   }
 
   @Get(':id')
