@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
 import * as Knex from 'knex';
+import { attachPaginate } from 'knex-paginate';
 
 const providers = [
   {
@@ -12,6 +13,8 @@ const providers = [
         },
         debug: process.env.KNEX_DEBUG === 'true',
       });
+
+      attachPaginate();
 
       return knex;
     },
