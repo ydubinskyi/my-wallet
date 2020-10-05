@@ -5,7 +5,9 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import * as Knex from 'knex';
+import { IWithPagination } from 'knex-paginate';
 
+import { PaginationParams } from '../shared/types/pagination-params.interface';
 import { TABLES } from '../db/constants';
 import { Currency } from './entities/currency.entity';
 import { CreateCurrencyDto } from './dto/create-currency.dto';
@@ -27,8 +29,13 @@ export class CurrencyService {
     }
   }
 
-  async findAll(): Promise<Currency[]> {
-    return await this.table.select('*');
+  async findAll({
+    page,
+    perPage,
+  }: PaginationParams): Promise<IWithPagination<Currency[]>> {
+    return await this.table
+      .select('*')
+      .paginate({ perPage, currentPage: page });
   }
 
   async findOne(id: number): Promise<Currency> {

@@ -13,6 +13,8 @@ import {
 import { AuthGuard } from '@nestjs/passport';
 import { ApiBearerAuth } from '@nestjs/swagger';
 
+import { PaginationParams } from '../shared/types';
+import { OApiPaginationParams, Pagination } from '../shared/decorators';
 import { CurrencyService } from './currency.service';
 import { CreateCurrencyDto } from './dto/create-currency.dto';
 import { UpdateCurrencyDto } from './dto/update-currency.dto';
@@ -29,8 +31,9 @@ export class CurrencyController {
   }
 
   @Get()
-  findAll() {
-    return this.currencyService.findAll();
+  @OApiPaginationParams()
+  findAll(@Pagination() pagination: PaginationParams) {
+    return this.currencyService.findAll(pagination);
   }
 
   @Get(':id')
