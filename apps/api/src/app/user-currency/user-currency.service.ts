@@ -35,7 +35,15 @@ export class UserCurrencyService {
   }
 
   async findAll(user_id: number) {
-    return await this.table.select('*').where({ user_id });
+    return await this.table
+      .where({ user_id })
+      .join(
+        TABLES.CURRENCY,
+        `${TABLES.USER_CURRENCY}.currency_id`,
+        '=',
+        `${TABLES.CURRENCY}.id`
+      )
+      .select('*');
   }
 
   async findOne(user_id: number, id: number) {

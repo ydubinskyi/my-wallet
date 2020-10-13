@@ -9,6 +9,7 @@ import { LocalStrategy } from './passport/local.strategy';
 import { JwtStrategy } from './passport/jwt.strategy';
 import { environment } from '../../environments/environment';
 import { UserService } from '../user/user.service';
+import { UserCurrencyService } from '../user-currency/user-currency.service';
 
 @Module({
   imports: [
@@ -18,7 +19,13 @@ import { UserService } from '../user/user.service';
       secret: environment.secret,
     }),
   ],
-  providers: [UserService, AuthService, LocalStrategy, JwtStrategy],
+  providers: [
+    UserCurrencyService,
+    UserService,
+    AuthService,
+    LocalStrategy,
+    JwtStrategy,
+  ],
   controllers: [AuthController],
   exports: [AuthService, PassportModule],
 })

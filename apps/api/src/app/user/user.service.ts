@@ -11,10 +11,14 @@ import { TABLES } from '../db/constants';
 import { User } from './entities/user.entity';
 import { RegisterUserDTO } from '../auth/dto/register-user.dto';
 import { IUser } from './types/user.interface';
+import { UserCurrencyService } from '../user-currency/user-currency.service';
 
 @Injectable()
 export class UserService {
-  constructor(@Inject('KnexConnection') private readonly connection: Knex) {}
+  constructor(
+    @Inject('KnexConnection') private readonly connection: Knex,
+    private readonly userCurrencyService: UserCurrencyService
+  ) {}
 
   private get table() {
     return this.connection.table<User>(TABLES.USER);
@@ -46,13 +50,12 @@ export class UserService {
 
   async findOne(id: number): Promise<User> {
     try {
-      const items = await this.table.where({ id });
+      const user = await this.table.where({ id }).first();
 
-      if (items.length < 1) {
+      if (!user) {
         throw new NotFoundException();
       }
 
-      const user = await this.table.select('*').where({ id }).first();
       delete user.password;
 
       return user;
@@ -63,13 +66,19 @@ export class UserService {
 
   async findOneByUsername(username: string): Promise<User> {
     try {
-      const items = await this.table.where({ username });
+      const user = await this.table.where({ username }).first();
 
-      if (items.length < 1) {
+      if (!user) {
         throw new NotFoundException();
       }
 
-      return this.table.select('*').where({ username }).first();
+      const currencies = await this.userCurrencyService.findAll(user.id);
+      const userWithCurrencies = {
+        ...user,
+        currencies,
+      };
+
+      return userWithCurrencies;
     } catch (error) {
       throw new BadRequestException(error);
     }
