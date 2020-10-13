@@ -6,12 +6,14 @@ import { UserDetails } from './types/user-details.interface';
 
 const localStorageKey = '__auth__';
 
-function getToken(): string {
-  return window.localStorage.getItem(localStorageKey);
+function getAuthDetails(): UserDetails {
+  const details = window.localStorage.getItem(localStorageKey);
+
+  return details ? JSON.parse(details) : null;
 }
 
 function handleUserResponse(userDetails: UserDetails) {
-  window.localStorage.setItem(localStorageKey, userDetails.access_token);
+  window.localStorage.setItem(localStorageKey, JSON.stringify(userDetails));
   return userDetails;
 }
 
@@ -27,4 +29,4 @@ async function logout(): Promise<void> {
   window.localStorage.removeItem(localStorageKey);
 }
 
-export { login, register, logout, getToken };
+export { login, register, logout, getAuthDetails };

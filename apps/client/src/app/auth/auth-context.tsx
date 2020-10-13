@@ -15,7 +15,9 @@ const AuthContext = React.createContext<AuthContextValue>({
 AuthContext.displayName = 'AuthContext';
 
 const AuthProvider = (props) => {
-  const [user, setUser] = useState<UserDetails>(null);
+  const [user, setUser] = useState<UserDetails>(() =>
+    authService.getAuthDetails()
+  );
 
   const login = React.useCallback(
     (form: LoginDetails) =>
