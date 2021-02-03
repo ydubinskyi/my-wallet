@@ -10,7 +10,7 @@ import {
   HttpStatus,
   UseGuards,
 } from '@nestjs/common';
-import { ApiBearerAuth } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { AuthGuard } from '@nestjs/passport';
 
 import { User } from '../shared/decorators';
@@ -18,6 +18,7 @@ import { RecordService } from './record.service';
 import { CreateRecordDto } from './dto/create-record.dto';
 import { UpdateRecordDto } from './dto/update-record.dto';
 
+@ApiTags('records')
 @ApiBearerAuth()
 @UseGuards(AuthGuard('jwt'))
 @Controller('records')

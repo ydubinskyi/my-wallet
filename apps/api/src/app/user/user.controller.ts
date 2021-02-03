@@ -6,10 +6,11 @@ import {
   HttpStatus,
   Param,
 } from '@nestjs/common';
-import { ApiBearerAuth } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
 import { UserService } from './user.service';
 
+@ApiTags('users')
 @ApiBearerAuth()
 @Controller('users')
 export class UserController {

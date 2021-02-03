@@ -11,7 +11,7 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
-import { ApiBearerAuth } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
 import { PaginationParams } from '../shared/types';
 import { OApiPaginationParams, Pagination } from '../shared/decorators';
@@ -19,6 +19,7 @@ import { CurrencyService } from './currency.service';
 import { CreateCurrencyDto } from './dto/create-currency.dto';
 import { UpdateCurrencyDto } from './dto/update-currency.dto';
 
+@ApiTags('currencies')
 @ApiBearerAuth()
 @UseGuards(AuthGuard('jwt'))
 @Controller('currencies')
