@@ -1,7 +1,7 @@
 import { useEffect, useState, useCallback } from 'react';
-import { useClient } from './useClient';
 
-type Status = 'idle' | 'pending' | 'success' | 'error';
+import { Status } from './common.types';
+import { useClient } from './useClient';
 
 function useResourceSearch<T>(endpoint: string, query?: string) {
   const client = useClient();
