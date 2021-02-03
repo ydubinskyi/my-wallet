@@ -1,39 +1,64 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-import Paper from '@material-ui/core/Paper';
-
+import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
-import { PageWrap } from '../shared';
+import AccountBalanceIcon from '@material-ui/icons/AccountBalance';
+import AddIcon from '@material-ui/icons/Add';
+import Button from '@material-ui/core/Button';
+
+import CreateAccountDialog from './createAccountDialog';
+import { CardListItem, PageWrap } from '../shared';
 import { useAccountsSearch } from '../core/hooks/accounts';
-import { Box } from '@material-ui/core';
 
 const Accounts = () => {
   const { data, isLoading, refresh } = useAccountsSearch();
+  const [createDialogStatus, setCreateDialogStatus] = useState(false);
+
   return (
     <PageWrap>
-      <Typography component="h1" variant="h5">
-        Accounts
-      </Typography>
-      <button
-        onClick={() => {
-          console.log('clicked');
+      <CreateAccountDialog
+        open={createDialogStatus}
+        onClose={() => setCreateDialogStatus(false)}
+        onSubmit={() => {
           refresh();
+          setCreateDialogStatus(false);
         }}
+      />
+      <Box
+        display="flex"
+        alignItems="center"
+        justifyContent="space-between"
+        width="100%"
       >
-        Refresh
-      </button>
-      <br />
+        <Typography component="h1" variant="h5">
+          Accounts
+        </Typography>
+        <Button
+          variant="contained"
+          color="secondary"
+          startIcon={<AddIcon />}
+          onClick={() => setCreateDialogStatus(true)}
+        >
+          Create account
+        </Button>
+      </Box>
+
       {!isLoading &&
         data?.map((item) => (
-          <Paper key={item.id}>
-            <Box p={2}>
-              <Typography variant="h4">{item.name}</Typography>
-              <Typography>{item.description}</Typography>
-              <Typography>{item.balance}</Typography>
-            </Box>
-          </Paper>
+          <CardListItem
+            key={item.id}
+            icon={
+              <AccountBalanceIcon
+                fontSize="large"
+                style={{ color: item.accent_color }}
+              />
+            }
+          >
+            <Typography variant="h4">{item.name}</Typography>
+            <Typography>{item.description}</Typography>
+            <Typography>{item.balance}</Typography>
+          </CardListItem>
         ))}
-      <Paper></Paper>
     </PageWrap>
   );
 };
