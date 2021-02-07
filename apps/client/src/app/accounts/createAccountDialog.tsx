@@ -34,6 +34,31 @@ export default function CreateAccountDialog({ open, onClose, onSubmit }) {
 
   const clearForm = () => {
     setName('');
+    setType('GENERAL');
+    setCurrency('PLN');
+    setStartAmount(0);
+    setDescription('');
+    setAccentColor('#cccccc');
+  };
+
+  const onCancelForm = () => {
+    onClose();
+    clearForm();
+  };
+
+  const onSubmitForm = () => {
+    const formData = {
+      name,
+      type,
+      description,
+      user_currency_id: currency,
+      start_amount: startAmount,
+      accent_color: accentColor,
+    };
+
+    onSubmit(formData);
+    clearForm();
+    onClose();
   };
 
   return (
@@ -71,7 +96,7 @@ export default function CreateAccountDialog({ open, onClose, onSubmit }) {
             value={currency}
             onChange={(e) => setCurrency(e.target.value as string)}
           >
-            <MenuItem value={'PLN'}>PLN</MenuItem>
+            <MenuItem value={'101'}>PLN</MenuItem>
             <MenuItem value={'USD'}>USD</MenuItem>
             <MenuItem value={'EUR'}>EUR</MenuItem>
           </Select>
@@ -83,7 +108,7 @@ export default function CreateAccountDialog({ open, onClose, onSubmit }) {
           type="number"
           fullWidth
           value={startAmount}
-          onChange={(e) => setStartAmount(e.target.value as number)}
+          onChange={(e) => setStartAmount(Number(e.target.value))}
         />
         <TextField
           className={classes.formControl}
@@ -93,7 +118,7 @@ export default function CreateAccountDialog({ open, onClose, onSubmit }) {
           multiline
           fullWidth
           value={description}
-          onChange={(e) => setDescription(e.target.value as string)}
+          onChange={(e) => setDescription(e.target.value)}
         />
         <TextField
           className={classes.formControl}
@@ -102,14 +127,14 @@ export default function CreateAccountDialog({ open, onClose, onSubmit }) {
           type="color"
           fullWidth
           value={accentColor}
-          onChange={(e) => setAccentColor(e.target.value as string)}
+          onChange={(e) => setAccentColor(e.target.value)}
         />
       </DialogContent>
       <DialogActions>
-        <Button onClick={onClose} color="primary">
+        <Button onClick={onCancelForm} color="primary">
           Cancel
         </Button>
-        <Button onClick={onSubmit} color="primary">
+        <Button onClick={onSubmitForm} color="primary">
           Create
         </Button>
       </DialogActions>

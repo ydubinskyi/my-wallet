@@ -9,19 +9,27 @@ import Button from '@material-ui/core/Button';
 import CreateAccountDialog from './createAccountDialog';
 import { CardListItem, PageWrap } from '../shared';
 import { useAccountsSearch } from '../core/hooks/accounts';
+import { useClient } from '../core/hooks/useClient';
 
 const Accounts = () => {
   const { data, isLoading, refresh } = useAccountsSearch();
+  const client = useClient();
   const [createDialogStatus, setCreateDialogStatus] = useState(false);
+
+  const createNewAccount = (formData) => {
+    client('accounts', {
+      data: formData,
+    });
+  };
 
   return (
     <PageWrap>
       <CreateAccountDialog
         open={createDialogStatus}
         onClose={() => setCreateDialogStatus(false)}
-        onSubmit={() => {
+        onSubmit={(formData) => {
+          createNewAccount(formData);
           refresh();
-          setCreateDialogStatus(false);
         }}
       />
       <Box
